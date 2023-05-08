@@ -39,10 +39,12 @@ void directionCheck()
 
     if (newValue == true)
     {
+      /*
         Serial.print("deg:");
         Serial.print(degree);
         Serial.print("\t act:");
         Serial.print(activity);
         Serial.println("");
+      */
     }
 }
