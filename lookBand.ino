@@ -1,9 +1,10 @@
 int deathCountGX = 10;
 
 bool firstCheck = 1;
+
 void lookBand()
 {
-    //感度の閾値？
+    //現在の感度
     float GoldenRaspberry = 0;
     for (int band = 10; band < 14; band++)
     {
@@ -27,7 +28,7 @@ void lookBand()
 
     //Serial.println(GoldenRaspberry);
 
-    if (GoldenRaspberry > 2000)
+    if (GoldenRaspberry > detectSoundLevel)
     {
         if (firstCheck)
         {
@@ -37,7 +38,7 @@ void lookBand()
         }
     }
 
-    if (GoldenRaspberry > 1500 && !firstCheck)
+    if (GoldenRaspberry > detectSoundLevel && !firstCheck)
     {
         if (ditectStock < 5)
             ditectStock++;

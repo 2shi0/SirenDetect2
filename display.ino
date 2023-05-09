@@ -45,26 +45,6 @@ void nomalDisplay()
 
         sprite.println("DETECTED");
 
-        sprite.setTextSize(4);
-
-        if (activity > 0.6 && degree >= 0 && degree <= 360)
-        {
-            arr = arr * 0.75 + degree * 0.25;
-            // arr = 360 - degree;
-        }
-
-        double dis = arr;
-
-        // 矢印
-        sprite.setPivot(M5.Lcd.width() - M5.Lcd.height(), M5.Lcd.height() / 2);
-        arrow.pushRotated(&sprite, dis, BLUE);
-
-        // デバッグ用
-        sprite.setTextSize(2);
-        sprite.print("dis: ");
-        sprite.println(dis);
-        sprite.print("deg: ");
-        sprite.println(degree);
     }
     else
     {
@@ -100,6 +80,11 @@ void nomalDisplay()
             c = 0;
         }
 
+        sprite.setCursor(10, 100);
+        sprite.setTextColor(BLACK, BLUE);
+        sprite.println("TH:"+(String)detectSoundLevel);
+
+        
         sprite.setTextColor(BLACK, BLUE);
         sprite.setCursor(170, 100);
         unsigned int b = (M5.Axp.GetBatVoltage() - 3) * 100 / 1.2;

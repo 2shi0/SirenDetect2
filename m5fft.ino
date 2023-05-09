@@ -37,6 +37,9 @@ int sortedList[RMAX];
 // Hzに変換したやつ
 int hzList[RMAX];
 
+//4000
+int detectSoundLevel = 4000;
+
 //サーボ
 /*
 const int servoPin = 26;
@@ -189,49 +192,11 @@ void loop()
     //ボタンを見る
     if (!digitalRead(BTN_A_PIN))
     {
-        //文字位置リセット
-        // scrollCount = 135;
-
-        displayMode = !displayMode;
-
-        Serial.println(displayMode);
-
-        if (displayMode)
-        {
-            //通常モード
-            M5.Lcd.setRotation(1);
-
-            // 画面の向き
-            // M5.Lcd.setRotation(3);
-            // sprite2.setCursor(0, 0);
-            // sprite2.fillScreen(BLUE);
-            // sprite2.print("Where?");
-            // sprite2.pushSprite(0,0);
-        }
-        else
-        {
-            //デバッグモード
-            M5.Lcd.setRotation(0);
-
-            //画面の向き
-            // M5.Lcd.setRotation(0);
-            // sprite.setCursor(0, 0);
-            // sprite.fillScreen(BLACK);
-            // sprite.pushSprite(0, 0);
-        }
-
-        //切替時に画面を掃除
-
-        /*
-        if (soundMode < maxMode)
-        {
-            soundMode++;
-        }
-        else
-        {
-            soundMode = 0;
-        }
-        */
+      if(detectSoundLevel>=4000){
+        detectSoundLevel=1000;
+      }else{
+        detectSoundLevel+=500;
+      }
 
         while (!digitalRead(BTN_A_PIN))
             delay(1);
