@@ -2,7 +2,8 @@
 #define PIN_DATA 34
 #define READ_LEN (2 * 256)
 
-/// @brief どうやら音を取っているらしい
+#include <driver/i2s.h>
+
 void i2sInit()
 {
     i2s_config_t i2s_config = {
