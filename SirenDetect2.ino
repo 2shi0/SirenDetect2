@@ -133,7 +133,7 @@ void mic_record_task(void *arg)
         // detect();
 
         //処理時間均一化委員会
-        // 100000で0.1ms
+        // 100000で0.1ms（本当か？）
         // while ((micros() - t1) < 100000);
 
         //処理時間を測る（終了地点）
