@@ -1,6 +1,8 @@
 #ifndef SOUND_MANAGER_H_
 #define SOUND_MANAGER_H_
 
+#include "fft_calculator.h"
+
 class sound_manager
 {
 public:
@@ -10,6 +12,7 @@ public:
 private:
     void show_signal();
     size_t bytesread;
+    fft_calculator f;
 };
 
 #endif

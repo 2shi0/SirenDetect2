@@ -1,7 +1,6 @@
 #include <M5StickCPlus.h>
 #include <driver/i2s.h>
 #include "sound_manager.h"
-#include "fft_calculator.h"
 
 #define PIN_CLK 0
 #define PIN_DATA 34
@@ -9,7 +8,7 @@
 
 uint8_t BUFFER[READ_LEN];
 uint16_t oldy[256];
-int16_t *adcBuffer;
+int16_t *adc_buffer;
 
 // https://lang-ship.com/blog/work/m5stickc-mic/
 sound_manager::sound_manager()
@@ -38,8 +37,9 @@ sound_manager::sound_manager()
 void sound_manager::mic_record_task()
 {
     i2s_read(I2S_NUM_0, (char *)BUFFER, READ_LEN, &bytesread, (100 / portTICK_RATE_MS));
-    adcBuffer = (int16_t *)BUFFER;
+    adc_buffer = (int16_t *)BUFFER;
     show_signal();
+    f.fft(adc_buffer);
     vTaskDelay(100 / portTICK_RATE_MS);
 }
 
@@ -49,7 +49,7 @@ void sound_manager::show_signal()
     int32_t offset_sum = 0;
     for (int n = 0; n < 256; n++)
     {
-        offset_sum += (int16_t)adcBuffer[n];
+        offset_sum += (int16_t)adc_buffer[n];
     }
     int offset_val = -(offset_sum / 256);
 
@@ -57,7 +57,7 @@ void sound_manager::show_signal()
     int max_val = 200;
     for (int n = 0; n < 256; n++)
     {
-        int16_t val = (int16_t)adcBuffer[n] + offset_val;
+        int16_t val = (int16_t)adc_buffer[n] + offset_val;
         if (max_val < abs(val))
         {
             max_val = abs(val);
@@ -67,7 +67,7 @@ void sound_manager::show_signal()
     int y;
     for (int n = 0; n < 256; n++)
     {
-        y = adcBuffer[n] + offset_val;
+        y = adc_buffer[n] + offset_val;
         y = map(y, -max_val, max_val, 10, 70);
         M5.Lcd.drawPixel(n, oldy[n], WHITE);
         M5.Lcd.drawPixel(n, y, BLACK);
