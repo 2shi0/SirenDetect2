@@ -2,6 +2,6 @@
     "configuration": "PartitionScheme=default,UploadSpeed=1500000,DebugLevel=none",
     "board": "esp32:esp32:m5stick-c",
     "port": "COM4",
-    "sketch": "SirenDetect2.ino",
+    "sketch": "SirenDitect2.ino",
     "output": "../ArduinoOutput"
 }
