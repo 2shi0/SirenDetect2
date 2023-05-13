@@ -1,6 +1,7 @@
 #include <M5StickCPlus.h>
 #include <driver/i2s.h>
-#include "FftManager.h"
+#include "sound_manager.h"
+#include "fft_calculator.h"
 
 #define PIN_CLK 0
 #define PIN_DATA 34
@@ -10,8 +11,8 @@ uint8_t BUFFER[READ_LEN];
 uint16_t oldy[256];
 int16_t *adcBuffer;
 
-//https://lang-ship.com/blog/work/m5stickc-mic/
-fft_manager::fft_manager()
+// https://lang-ship.com/blog/work/m5stickc-mic/
+sound_manager::sound_manager()
 {
     i2s_config_t i2s_config = {
         .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_PDM),
@@ -34,7 +35,7 @@ fft_manager::fft_manager()
     i2s_set_clk(I2S_NUM_0, 44100, I2S_BITS_PER_SAMPLE_16BIT, I2S_CHANNEL_MONO);
 }
 
-void fft_manager::mic_record_task()
+void sound_manager::mic_record_task()
 {
     i2s_read(I2S_NUM_0, (char *)BUFFER, READ_LEN, &bytesread, (100 / portTICK_RATE_MS));
     adcBuffer = (int16_t *)BUFFER;
@@ -42,7 +43,7 @@ void fft_manager::mic_record_task()
     vTaskDelay(100 / portTICK_RATE_MS);
 }
 
-void fft_manager::show_signal()
+void sound_manager::show_signal()
 {
     // Offset
     int32_t offset_sum = 0;
@@ -51,6 +52,7 @@ void fft_manager::show_signal()
         offset_sum += (int16_t)adcBuffer[n];
     }
     int offset_val = -(offset_sum / 256);
+
     // Auto Gain
     int max_val = 200;
     for (int n = 0; n < 256; n++)
@@ -71,23 +73,4 @@ void fft_manager::show_signal()
         M5.Lcd.drawPixel(n, y, BLACK);
         oldy[n] = y;
     }
-}
-
-// https://stackoverflow.com/questions/45831114/c-freertos-task-invalid-use-of-non-static-member-function
-void fft_manager::task()
-{
-    while (1)
-    {
-        this->mic_record_task();
-    }
-}
-
-void fft_manager::startTaskImpl(void *_this)
-{
-    static_cast<fft_manager *>(_this)->task();
-}
-
-void fft_manager::task_start()
-{
-    xTaskCreate(this->startTaskImpl, "Task", 2048, this, 5, NULL);
 }
