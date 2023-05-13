@@ -10,7 +10,7 @@ void task_runner::task()
 {
     while (1)
     {
-        this->s.mic_record_task();
+        f.fft(s.mic_record_task());
     }
 }
 

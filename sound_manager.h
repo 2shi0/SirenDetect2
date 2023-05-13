@@ -7,12 +7,11 @@ class sound_manager
 {
 public:
     sound_manager();
-    void mic_record_task();
+    int16_t *mic_record_task();
 
 private:
     void show_signal();
     size_t bytesread;
-    fft_calculator f;
 };
 
 #endif

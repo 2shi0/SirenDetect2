@@ -34,13 +34,13 @@ sound_manager::sound_manager()
     i2s_set_clk(I2S_NUM_0, 44100, I2S_BITS_PER_SAMPLE_16BIT, I2S_CHANNEL_MONO);
 }
 
-void sound_manager::mic_record_task()
+int16_t *sound_manager::mic_record_task()
 {
     i2s_read(I2S_NUM_0, (char *)BUFFER, READ_LEN, &bytesread, (100 / portTICK_RATE_MS));
     adc_buffer = (int16_t *)BUFFER;
     show_signal();
-    f.fft(adc_buffer);
-    vTaskDelay(100 / portTICK_RATE_MS);
+    return adc_buffer;
+    // vTaskDelay(100 / portTICK_RATE_MS);
 }
 
 void sound_manager::show_signal()
