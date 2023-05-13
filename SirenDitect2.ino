@@ -1,10 +1,15 @@
-#include "M5StickCPlus.h"
 #include "FftManager.h"
+#include <M5StickCPlus.h>
 void setup()
 {
+    M5.begin();
+    M5.Lcd.setRotation(1);
+    M5.Lcd.fillScreen(WHITE);
+    
     fft_manager fm;
-    fm.i2s_init();
+    fm.task_start();
 }
 void loop()
 {
+    delay(1);
 }
