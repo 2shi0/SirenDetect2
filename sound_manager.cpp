@@ -2,11 +2,7 @@
 #include <driver/i2s.h>
 #include "sound_manager.h"
 
-#define PIN_CLK 0
-#define PIN_DATA 34
-#define READ_LEN (2 * 256)
-
-uint8_t BUFFER[READ_LEN];
+uint8_t BUFFER[sound_manager::READ_LEN];
 uint16_t oldy[256];
 int16_t *adc_buffer;
 

@@ -6,6 +6,9 @@
 class sound_manager
 {
 public:
+    static const int PIN_CLK = 0;
+    static const int PIN_DATA = 34;
+    static const int READ_LEN = (2 * 256);
     sound_manager();
     int16_t *mic_record_task();
 

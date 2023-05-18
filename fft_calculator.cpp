@@ -1,15 +1,12 @@
 #include "fft_calculator.h"
 
-#define SAMPLES 512
-#define SAMPLING_FREQUENCY 44100
-
 // https://mono.dendai.ac.jp/techinfo/arduino-fft/
-double vReal[SAMPLES]; // 複素データreal領域（時間軸データ領域）
-double vImag[SAMPLES]; // 複素データmag領域
+double vReal[fft_calculator::SAMPLES]; // 複素データreal領域（時間軸データ領域）
+double vImag[fft_calculator::SAMPLES]; // 複素データmag領域
 
 fft_calculator::fft_calculator()
 {
-     FFT = arduinoFFT();
+    FFT = arduinoFFT();
 }
 
 void fft_calculator::fft(int16_t *adc_buffer)
