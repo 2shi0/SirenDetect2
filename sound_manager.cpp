@@ -65,8 +65,8 @@ void sound_manager::show_signal()
     {
         y = adc_buffer[n] + offset_val;
         y = map(y, -max_val, max_val, 10, 70);
-        M5.Lcd.drawPixel(n, oldy[n], WHITE);
-        M5.Lcd.drawPixel(n, y, BLACK);
+        //M5.Lcd.drawPixel(n, oldy[n], WHITE);
+        //M5.Lcd.drawPixel(n, y, BLACK);
         oldy[n] = y;
     }
 }
