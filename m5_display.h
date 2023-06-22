@@ -2,6 +2,7 @@
 #define M5_DISPLAY_H__
 
 #include <M5StickCPlus.h>
+#include "fft_calculator.h"
 
 class m5_display
 {

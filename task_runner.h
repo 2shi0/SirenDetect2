@@ -3,6 +3,7 @@
 
 #include "sound_manager.h"
 #include "fft_calculator.h"
+#include "m5_display.h"
 
 class task_runner
 {
@@ -15,6 +16,7 @@ private:
     fft_calculator f;
     void task();
     static void startTaskImpl(void *_this);
+    double *fft_result;
 };
 
 #endif

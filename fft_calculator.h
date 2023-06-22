@@ -10,7 +10,9 @@ public:
     static const int SAMPLES = 512;
     static const int SAMPLING_FREQUENCY = 44100;
     fft_calculator();
-    void fft(int16_t *adc_buffer);
+    double *fft(int16_t *adc_buffer);
+    double vReal[SAMPLES]; // 複素データreal領域（時間軸データ領域）
+    double vImag[SAMPLES]; // 複素データmag領域
 
 private:
     arduinoFFT FFT;

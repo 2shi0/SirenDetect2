@@ -1,4 +1,5 @@
 #include "m5_display.h"
+#include "fft_calculator.h"
 #include <M5StickCPlus.h>
 
 m5_display::m5_display()
@@ -19,18 +20,28 @@ void m5_display::draw(int degree)
     mainSprite.fillRect(0, 0, M5.Lcd.width(), M5.Lcd.height(), BLACK);
 
     mainSprite.setTextColor(WHITE);
-    mainSprite.setCursor(0,125);
-    mainSprite.println("0Hz");
+    mainSprite.setCursor(0, 125);
+    mainSprite.println("0.02kHz");
 
-    mainSprite.setCursor(210,125);
-    mainSprite.println("41kHz");
+    mainSprite.setCursor(70, 125);
+    mainSprite.println("6kHz");
 
-    // 矢印のスプライト
-    arrowSprite.createSprite(M5.Lcd.width(), M5.Lcd.height());
-    //arrowSprite.drawCircle(M5.Lcd.width() * 0.5, M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.45, GREEN);
-    arrowSprite.drawRect(M5.Lcd.width() / 2, M5.Lcd.height() / 2, 50, 50, GREEN);
+    mainSprite.setCursor(140, 125);
+    mainSprite.println("12kHz");
 
+    mainSprite.setCursor(210, 125);
+    mainSprite.println("20kHz");
+
+    // くるくる
+    arrowSprite.createSprite(M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.5);
+    arrowSprite.drawRect(0, 0, M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.5, GREEN);
     arrowSprite.pushRotated(&mainSprite, degree, BLUE);
+
+    // グラフ
+    for (int i = 0; i < M5.Lcd.width(); i++)
+    {
+        //mainSprite.drawLine(i,123,i,(int)fft_calculator::vReal[i] / 10000.0);
+    }
 
     // LCDに転写
     mainSprite.pushSprite(0, 0);
