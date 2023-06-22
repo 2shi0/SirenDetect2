@@ -1,6 +1,6 @@
 #include <M5StickCPlus.h>
 #include "task_runner.h"
-#include "m5_display.h"
+//#include "m5_display.h"
 
 m5_display m;
 task_runner t;
@@ -11,15 +11,10 @@ void setup()
 
     t.task_start();
 
-    m.init();
+    //m.init();
 }
-
-int deg = 0;
 
 void loop()
 {
-    m.draw(deg);
-    deg++;
-    if (deg > 360)
-        deg = 0;
+    //m.draw();
 }

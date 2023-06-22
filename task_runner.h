@@ -17,6 +17,7 @@ private:
     void task();
     static void startTaskImpl(void *_this);
     double *fft_result;
+    m5_display m;
 };
 
 #endif

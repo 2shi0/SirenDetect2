@@ -9,11 +9,12 @@ class m5_display
 public:
     m5_display();
     void init();
-    void draw(int degree);
+    void draw(double *fft_result);
 
 private:
     TFT_eSprite mainSprite = TFT_eSprite(&M5.Lcd);
     TFT_eSprite arrowSprite = TFT_eSprite(&M5.Lcd);
+    int deg;
 };
 
 #endif
