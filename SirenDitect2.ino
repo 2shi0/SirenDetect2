@@ -3,20 +3,23 @@
 #include "m5_display.h"
 
 m5_display m;
+task_runner t;
 
 void setup()
 {
     M5.begin();
-    //M5.Lcd.fillScreen(WHITE);
 
-    task_runner t;
     t.task_start();
 
     m.init();
-
 }
+
+int deg = 0;
+
 void loop()
 {
-    m.draw();
-    delay(1);
+    m.draw(deg);
+    deg++;
+    if (deg > 360)
+        deg = 0;
 }

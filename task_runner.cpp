@@ -21,5 +21,5 @@ void task_runner::startTaskImpl(void *_this)
 
 void task_runner::task_start()
 {
-    xTaskCreate(this->startTaskImpl, "Task", 2048, this, 5, NULL);
+    xTaskCreate(this->startTaskImpl, "Task", 4096, this, 5, NULL);
 }
