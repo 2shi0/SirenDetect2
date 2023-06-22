@@ -21,8 +21,11 @@ bool check_for_siren::check(double *fft_result)
         vol_960 += fft_result[i];
     }
 
-    Serial.println("770Hz" + String(vol_770));
-    Serial.println("960Hz" + String(vol_960));
+    // Serial.println("770Hz" + String(vol_770));
+    // Serial.println("960Hz" + String(vol_960));
+
+    Serial.println("770Hz" + String(fft_result[89]));
+    Serial.println("960Hz" + String(fft_result[111]));
 
     vol_770 = 0;
     vol_960 = 0;
