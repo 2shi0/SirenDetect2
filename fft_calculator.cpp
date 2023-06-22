@@ -20,7 +20,7 @@ double *fft_calculator::fft(int16_t *adc_buffer)
     FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);                   // FFT演算
     FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);                     // パワー(V)演算
 
-    /*
+    #if 0
         for (uint16_t band = 0; band < SAMPLES; band++)
         {
 
@@ -31,7 +31,7 @@ double *fft_calculator::fft(int16_t *adc_buffer)
             //Serial.println(vReal[band] / 10000.0);
             Serial.println(vReal[band] * 0.0001);
         }
-    */
+    #endif
 
    return vReal;
 }

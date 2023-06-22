@@ -10,10 +10,12 @@ void task_runner::task()
 {
     while (1)
     {
-        fft_result=f.fft(s.mic_record_task());
-        //for(int i=0;i<512;i++)
-        //Serial.println(fft_result[i]);
+        fft_result = f.fft(s.mic_record_task());
+        // for(int i=0;i<512;i++)
+        // Serial.println(fft_result[i]);
         m.draw(fft_result);
+
+
         delay(1);
     }
 }

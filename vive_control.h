@@ -1,6 +1,6 @@
 #ifndef VIVE_CONTROL_H__
 #define VIVE_CONTROL_H__
-
+#include "Arduino.h"
 class vive_control
 {
 public:

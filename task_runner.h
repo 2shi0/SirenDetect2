@@ -14,10 +14,11 @@ public:
 private:
     sound_manager s;
     fft_calculator f;
+    m5_display m;
     void task();
     static void startTaskImpl(void *_this);
     double *fft_result;
-    m5_display m;
+    
 };
 
 #endif

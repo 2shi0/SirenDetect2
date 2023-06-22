@@ -38,12 +38,21 @@ void m5_display::draw(double *fft_result)
         for (int i = 0; i < M5.Lcd.width(); i++)
         {
             int tmp = 120 - int(fft_result[i] * 0.0001);
-            if (tmp > 0)
+            if (tmp < 120)
                 mainSprite.drawLine(i, 120, i, tmp, LIGHTGREY);
-            else
-                mainSprite.drawLine(i, 120, i, 0, LIGHTGREY);
             // Serial.println(tmp);
         }
+
+    //救急車の周波数（数字）
+    c.check(fft_result);
+
+    /*
+    mainSprite.setTextColor(GREEN);
+    mainSprite.setCursor(180, 0);
+    mainSprite.println("770Hz:"+String(amb_array));
+    mainSprite.setCursor(180, 10);
+    mainSprite.println("960Hz:"+String(amb_array[1]));
+    */
 
     // くるくる
     arrowSprite.createSprite(M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.5);

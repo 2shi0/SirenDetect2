@@ -3,6 +3,7 @@
 
 #include <M5StickCPlus.h>
 #include "fft_calculator.h"
+#include "check_for_siren.h"
 
 class m5_display
 {
@@ -12,6 +13,7 @@ public:
     void draw(double *fft_result);
 
 private:
+    check_for_siren c;
     TFT_eSprite mainSprite = TFT_eSprite(&M5.Lcd);
     TFT_eSprite arrowSprite = TFT_eSprite(&M5.Lcd);
     int deg;
