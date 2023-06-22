@@ -11,6 +11,7 @@ void task_runner::task()
     while (1)
     {
         f.fft(s.mic_record_task());
+        delay(1);
     }
 }
 

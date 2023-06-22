@@ -18,9 +18,16 @@ void m5_display::draw(int degree)
     // sprite.fillScreenは縦向きの場合のみ機能
     mainSprite.fillRect(0, 0, M5.Lcd.width(), M5.Lcd.height(), BLACK);
 
+    mainSprite.setTextColor(WHITE);
+    mainSprite.setCursor(0,125);
+    mainSprite.println("0Hz");
+
+    mainSprite.setCursor(210,125);
+    mainSprite.println("41kHz");
+
     // 矢印のスプライト
     arrowSprite.createSprite(M5.Lcd.width(), M5.Lcd.height());
-    arrowSprite.drawCircle(M5.Lcd.width() * 0.5, M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.45, GREEN);
+    //arrowSprite.drawCircle(M5.Lcd.width() * 0.5, M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.45, GREEN);
     arrowSprite.drawRect(M5.Lcd.width() / 2, M5.Lcd.height() / 2, 50, 50, GREEN);
 
     arrowSprite.pushRotated(&mainSprite, degree, BLUE);
