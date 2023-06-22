@@ -34,36 +34,6 @@ uint16_t *sound_manager::mic_record_task()
 {
     i2s_read_bytes(I2S_NUM_0, (char *)BUFFER, READ_LEN, (20 / portTICK_RATE_MS));
     adc_buffer = (uint16_t *)BUFFER;
-    show_signal();
     return adc_buffer;
     // vTaskDelay(100 / portTICK_RATE_MS);
-}
-
-void sound_manager::show_signal()
-{
-    // Offset
-    int32_t offset_sum = 0;
-    for (int n = 0; n < 256; n++)
-    {
-        offset_sum += (int16_t)adc_buffer[n];
-    }
-    int offset_val = -(offset_sum / 256);
-
-    // Auto Gain
-    int max_val = 200;
-    for (int n = 0; n < 256; n++)
-    {
-        int16_t val = (int16_t)adc_buffer[n] + offset_val;
-        if (max_val < abs(val))
-        {
-            max_val = abs(val);
-        }
-    }
-
-    int y;
-    for (int n = 0; n < 256; n++)
-    {
-        y = adc_buffer[n] + offset_val;
-        y = map(y, -max_val, max_val, 10, 70);
-    }
 }

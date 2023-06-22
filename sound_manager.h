@@ -13,7 +13,6 @@ public:
     uint16_t *mic_record_task();
 
 private:
-    void show_signal();
     size_t bytesread;
 };
 
