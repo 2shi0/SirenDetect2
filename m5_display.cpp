@@ -35,11 +35,11 @@ void m5_display::draw(double *fft_result)
 
     // オフセット計測（平均値算出）
     double offset = 0;
-    for (int i = 0; i < M5.Lcd.width(); i++)
+    for (int i = 0; i < 512; i++)
     {
         offset += fft_result[i];
     }
-    offset = offset / M5.Lcd.width();
+    offset = offset / 512;
 
     // グラフ
     if (fft_result != NULL)
@@ -50,12 +50,6 @@ void m5_display::draw(double *fft_result)
                 mainSprite.drawLine(i, 120, i, tmp, LIGHTGREY);
             // Serial.println(tmp);
         }
-
-    // Serial.println("770Hz" + String((fft_result[88]+fft_result[89]+fft_result[90]) / 10000.0));
-    // Serial.println("960Hz" + String((fft_result[110]+fft_result[111]+fft_result[112]) / 10000.0));
-
-    // 救急車の周波数（数字）
-    c.check(fft_result);
 
     /*
     mainSprite.setTextColor(GREEN);
@@ -68,6 +62,14 @@ void m5_display::draw(double *fft_result)
     // くるくる
     arrowSprite.createSprite(M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.5);
     arrowSprite.drawRect(0, 0, M5.Lcd.height() * 0.5, M5.Lcd.height() * 0.5, GREEN);
+
+    // 救急車の周波数（数字）
+    if (c.check(fft_result, offset))
+    {
+        v.vive(200);
+    }
+
+    // くるくるをmainに転写
     arrowSprite.pushRotated(&mainSprite, deg, BLACK);
 
     deg++;
