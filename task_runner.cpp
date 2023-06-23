@@ -1,5 +1,6 @@
 #include <M5StickCPlus.h>
 #include "task_runner.h"
+#include "Arduino.h"
 
 task_runner::task_runner()
 {
@@ -14,7 +15,6 @@ void task_runner::task()
         // for(int i=0;i<512;i++)
         // Serial.println(fft_result[i]);
         m.draw(fft_result);
-
 
         delay(1);
     }

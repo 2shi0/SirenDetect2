@@ -1,10 +1,14 @@
 #include "m5_display.h"
 #include "fft_calculator.h"
 #include <M5StickCPlus.h>
+#include "Arduino.h"
 
 m5_display::m5_display()
 {
     deg = 0;
+
+    // ボタン
+    pinMode(37, INPUT_PULLUP);
 }
 
 void m5_display::init()
@@ -21,6 +25,8 @@ void m5_display::draw(double *fft_result)
     mainSprite.fillRect(0, 0, M5.Lcd.width(), M5.Lcd.height(), BLACK);
 
     mainSprite.setTextColor(WHITE);
+    mainSprite.setTextDatum(1);
+    mainSprite.setTextSize(1);
     mainSprite.setCursor(0, 125);
     mainSprite.println("0.02kHz");
 
@@ -75,6 +81,26 @@ void m5_display::draw(double *fft_result)
     deg++;
     if (deg > 360)
         deg = 0;
+
+    // 停止画面
+    //  ボタン
+    if (!digitalRead(37))
+    {
+        // LCDに転写
+        mainSprite.setCursor(0, 0);
+        mainSprite.setTextColor(RED);
+        mainSprite.setTextSize(4);
+        mainSprite.println("PAUSED");
+        mainSprite.pushSprite(0, 0);
+
+        while (!digitalRead(37))
+            delay(1);
+
+        while (digitalRead(37))
+            delay(1);
+
+        delay(200);
+    }
 
     // LCDに転写
     mainSprite.pushSprite(0, 0);
